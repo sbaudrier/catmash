@@ -1,0 +1,14 @@
+<svg width="320" height="80" viewBox="0 0 320 80" xmlns="http://www.w3.org/2000/svg" fill="#000">
+  <!-- Tête de chat stylisée -->
+  <g transform="translate(20,10)">
+    <path d="M30 10 L40 0 L42 16 A20 20 0 1 1 18 16 L20 0 Z"></path>
+    <circle cx="25" cy="30" r="2.5"></circle>
+    <circle cx="35" cy="30" r="2.5"></circle>
+    <path d="M29 34 q3 3 6 0" stroke="#000" stroke-width="2" fill="none"></path>
+  </g>
+
+  <!-- Texte CATMASH -->
+  <text x="100" y="50" font-family="system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="36" font-weight="900" letter-spacing="3">
+    CATMASH
+  </text>
+</svg>

@@ -1,0 +1,13 @@
+.ssr-only {
+  position: absolute;
+  opacity: 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--header-height);
+  background-color: var(--background);
+  text-align: center;
+}

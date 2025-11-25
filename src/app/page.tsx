@@ -17,18 +17,15 @@ export default async function Home() {
 
   const { images } = await getCats();
 
-  // const firstCats = images.slice(0, 2);
-
   return (
-    <main className={styles.votes}>
+    <main className={styles.home}>
       <Header />
       <Duel cats={images} />
-      <div className={styles.status}>
-        <Link href="/ranking" className={styles.cta}>
-          Voir le classement des chats
-        </Link>
-        <Matches />
-      </div>
+      <Matches
+        minified={true}
+        ctaUrl="/ranking"
+        ctaLabel="Voir le classement des chats"
+      />
     </main>
   );
 }

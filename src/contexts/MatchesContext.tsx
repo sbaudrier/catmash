@@ -6,10 +6,15 @@ import {
   useEffect,
   useState,
   type ReactNode,
+  useMemo,
 } from "react";
+
+type VoteCounts = Record<string, number>;
 
 type MatchesContextValue = {
   matches: string[];
+  voteCounts: VoteCounts;
+  getVotes: (id: string) => number;
   addMatch: (id: string) => void;
   resetMatches: () => void;
 };
@@ -23,29 +28,35 @@ type MatchesProviderProps = {
 };
 
 export function MatchesProvider({ children }: MatchesProviderProps) {
-  const [matches, setMatches] = useState<string[]>([]);
-
-  useEffect(() => {
+  const [matches, setMatches] = useState<string[]>(() => {
     try {
-      const saved = window.localStorage.getItem("matches");
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          // eslint-disable-next-line react-hooks/set-state-in-effect
-          setMatches(parsed);
-        }
+      if (typeof window !== "undefined") {
+        const saved = window.localStorage.getItem("matches");
+        const parsed = saved ? JSON.parse(saved) : [];
+        return Array.isArray(parsed) ? parsed : [];
       }
     } catch (e) {
       console.error("Failed to parse matches from localStorage", e);
     }
-  }, []);
+
+    return [];
+  });
 
   useEffect(() => {
     window.localStorage.setItem("matches", JSON.stringify(matches));
   }, [matches]);
 
+  const voteCounts = useMemo(() => {
+    return matches.reduce<Record<string, number>>((acc, id) => {
+      acc[id] = (acc[id] || 0) + 1;
+      return acc;
+    }, {});
+  }, [matches]);
+
+  const getVotes = (id: string) => voteCounts[id] || 0;
+
   const addMatch = (id: string) => {
-    setMatches((prev) => (prev.includes(id) ? prev : [...prev, id]));
+    setMatches((prev) => [...prev, id]);
   };
 
   const resetMatches = () => {
@@ -56,6 +67,8 @@ export function MatchesProvider({ children }: MatchesProviderProps) {
     <MatchesContext.Provider
       value={{
         matches,
+        voteCounts,
+        getVotes,
         addMatch,
         resetMatches,
       }}

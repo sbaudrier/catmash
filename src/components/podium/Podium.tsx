@@ -63,7 +63,7 @@ export function Podium({ cats }: PodiumProps) {
 
       {topRemainingCats.length > 0 && (
         <div className={styles["other-votes"]}>
-          <h2 className={styles.title}>Vous avez également voté pour</h2>
+          <h2 className={styles.title}>Vous avez également voté</h2>
           <div className={styles.remaining}>
             {topRemainingCats.map((cat, index) => (
               <li key={cat.id} className={classNames(styles["item"])}>

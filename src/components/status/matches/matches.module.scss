@@ -2,13 +2,31 @@
   position: sticky;
   left: 0;
   bottom: 0;
+
   padding: var(--size-xl) var(--size-xl) var(--size-m);
   background-color: var(--background);
   color: var(--text-primary);
   text-align: center;
 
   &.minified {
+    position: absolute;
+    width: 100%;
     background-color: transparent;
+    top: calc(50% - var(--header-height) / 2);
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: var(--size-xl);
+    padding: 0 var(--size-xl);
+
+    @media (min-width: 1024px), (orientation: landscape) {
+      top: auto;
+      transform: translate(-50%, 0);
+      width: auto;
+      height: auto;
+      padding: var(--size-xl) var(--size-xl) var(--size-m);
+    }
+
     @media (min-width: 1024px) {
       background-color: var(--background);
     }
@@ -36,6 +54,14 @@
 
   &:hover {
     background-color: var(--button-primary-hover);
+  }
+
+  .minified & {
+    margin-bottom: 0;
+
+    @media (min-width: 1024px) {
+      margin-bottom: var(--size-l);
+    }
   }
 }
 

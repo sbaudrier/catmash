@@ -2,17 +2,18 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
+  overflow: hidden;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px), (orientation: landscape) {
     flex-direction: row;
   }
 
   &-item {
     position: relative;
-    height: 50%;
+    height: 50dvh;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 1024px), (orientation: landscape) {
       width: 50%;
       height: auto;
     }
